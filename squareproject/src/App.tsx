@@ -24,6 +24,7 @@ function SquareInfo({value, n}: IValueNumber){ // NB: return type =  JSX.Element
 
 function Game() {
   const [stateGame, dispatch] = useReducer(stateGameReducer, 3, initStateGame);
+  console.log('Init/Refresh state: ', stateGame);
   return (
     <div className="game">
       <h2>Game</h2>

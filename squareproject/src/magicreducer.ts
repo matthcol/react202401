@@ -38,13 +38,16 @@ export function stateGameReducer(stateGame: IStateGame, action: IAction): IState
         case 'place_value': {
             const i = action.i??-1;
             const j = action.j??-1;
-            console.log('place/remove value at (i,j): ', i, j);
+            console.log(`place/remove value ${stateGame.selectedValue} at (${i},${j}) from/back ${stateGame.selectedIndex}`);
             let valuePutBack = 0;
             let newValues = [...stateGame.values];
             let newSquare = [...stateGame.square];
             let newSelectedIndex = stateGame.selectedIndex;
             let newSelectedValue = stateGame.selectedValue;
-            if (stateGame.square[i][j] !== 0) {
+            if (stateGame.square[i][j] === stateGame.selectedValue) {
+                return stateGame;
+            }
+            if ((stateGame.square[i][j] !== 0)) {
               console.log("A value is already there");
               // memorize value to put back in values
               valuePutBack = stateGame.square[i][j];
@@ -63,6 +66,7 @@ export function stateGameReducer(stateGame: IStateGame, action: IAction): IState
               newValues.push(valuePutBack);
               newValues.sort();
             }
+            console.log("new values: ", newValues);
             return {
                 ...stateGame,
                 square: newSquare,
