@@ -73,7 +73,7 @@ function Game() {
         <h3>Pick your values</h3>
         <Square1D
           values={stateGame.values}
-          selectedIndex={-1}
+          selectedIndex={stateGame.selectedIndex}
           dispatch={dispatch}
         />
       </div>

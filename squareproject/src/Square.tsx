@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, MouseEvent } from "react";
 import { IAction } from "./types/stategame";
 
 function SquareSum({ value, expectedValue }: {value: number, expectedValue: number}) {
@@ -13,12 +13,12 @@ function Square(
     { 
         value, 
         isSelected = false, 
-        dispatch 
+        handleClick 
     }: 
     {
         value: number, 
         isSelected: boolean, 
-        dispatch: Dispatch<IAction>
+        handleClick: (event?: MouseEvent<HTMLElement>) => void
     }) 
 {
   let buttonClasses = "column ";
@@ -26,7 +26,7 @@ function Square(
   return (
     <button
       onClick={(event) => {
-        // handleClick(event);
+         handleClick(event);
       }}
       className={buttonClasses}
     >
@@ -45,7 +45,11 @@ export function Square1D(
         <Square
           key={i}
           value={v}
-          dispatch={dispatch}
+          handleClick={() => dispatch({
+            type: "select_value",
+            newSelectedValue: v,
+            newSelectedIndex: i
+          })}
           isSelected={i === selectedIndex}
         />
       ))}
@@ -76,7 +80,7 @@ export function Square2D(
               value={v}
               isSelected={false}
               key={`val-${i}-${j}`}
-              dispatch={dispatch}
+              handleClick={() => {}}
             />
           ))}
           {displaySums && <SquareSum value={0} expectedValue={15} key={`sum-right-${n}`} />}

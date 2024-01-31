@@ -6,7 +6,9 @@ export function initStateGame(n: number): IStateGame {
         n: n,
         displaySums: false,
         square: initSquare(n),
-        values: initValues(n*n)
+        values: initValues(n*n),
+        selectedValue: 0,
+        selectedIndex: -1
     }
 }
 
@@ -21,6 +23,16 @@ export function stateGameReducer(stateGame: IStateGame, action: IAction): IState
             return {
                 ...stateGame,
                 displaySums: !stateGame.displaySums
+            }
+        }
+        case 'select_value': {
+            const newSelectedValue = action.newSelectedValue??stateGame.selectedValue;
+            const newSelectedIndex = action.newSelectedIndex??stateGame.selectedIndex;
+            console.log('new selection (index/value): ', newSelectedIndex, newSelectedValue)
+            return {
+                ...stateGame,
+                selectedValue: newSelectedValue,
+                selectedIndex: newSelectedIndex
             }
         }
     }
