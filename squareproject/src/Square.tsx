@@ -80,7 +80,11 @@ export function Square2D(
               value={v}
               isSelected={false}
               key={`val-${i}-${j}`}
-              handleClick={() => {}}
+              handleClick={() => dispatch({
+                type: 'place_value',
+                i:i,
+                j:j
+              })}
             />
           ))}
           {displaySums && <SquareSum value={0} expectedValue={15} key={`sum-right-${n}`} />}

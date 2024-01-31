@@ -35,6 +35,42 @@ export function stateGameReducer(stateGame: IStateGame, action: IAction): IState
                 selectedIndex: newSelectedIndex
             }
         }
+        case 'place_value': {
+            const i = action.i??-1;
+            const j = action.j??-1;
+            console.log('place/remove value at (i,j): ', i, j);
+            let valuePutBack = 0;
+            let newValues = [...stateGame.values];
+            let newSquare = [...stateGame.square];
+            let newSelectedIndex = stateGame.selectedIndex;
+            let newSelectedValue = stateGame.selectedValue;
+            if (stateGame.square[i][j] !== 0) {
+              console.log("A value is already there");
+              // memorize value to put back in values
+              valuePutBack = stateGame.square[i][j];
+              // remove previous value
+              newSquare[i][j] = 0;
+            }
+            if (stateGame.selectedValue != 0) {
+              console.log(`Placing value ${stateGame.selectedValue} at ${i},${j}`);
+              newSquare[i][j] = stateGame.selectedValue;
+              newValues.splice(stateGame.selectedIndex, 1);
+              newSelectedValue = 0;
+              newSelectedIndex = -1;
+            }
+            if (valuePutBack != 0) {
+              console.log(`Putting back value ${valuePutBack} in available values`);
+              newValues.push(valuePutBack);
+              newValues.sort();
+            }
+            return {
+                ...stateGame,
+                square: newSquare,
+                values: newValues,
+                selectedValue: newSelectedValue,
+                selectedIndex: newSelectedIndex
+            };
+        }
     }
     throw Error('Unknown action: ' + action.type);
 }

@@ -11,5 +11,7 @@ export interface IAction {
     type: string,
     newN?: number,
     newSelectedValue?: number,
-    newSelectedIndex?: number
+    newSelectedIndex?: number,
+    i?:number,
+    j?:number
 }
