@@ -7,7 +7,7 @@ import { IValueNumber } from './types/ivaluenumber';
 
 //function Square(props: {value: number, n: number}){
 //function Square({value, n}: {value: number, n: number}){
-function Square({value, n}: IValueNumber){ // NB: return type =  JSX.Element
+function SquareInfo({value, n}: IValueNumber){ // NB: return type =  JSX.Element
   // const {value, n} = props;
   let nbValues = n * n;
   return (<div>
@@ -24,7 +24,7 @@ function App() {
   square[0][1] = 2;
   return (
     <div className="App">
-      <Square n={3} value={square[0][1]}/>
+      <SquareInfo n={3} value={square[0][1]}/>
     </div>
   );
 }
