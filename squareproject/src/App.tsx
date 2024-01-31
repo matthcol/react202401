@@ -4,6 +4,7 @@ import './App.css';
 import { initSquare } from './magic';
 import { IValueNumber } from './types/ivaluenumber';
 import { initStateGame, stateGameReducer } from './magicreducer';
+import { Square1D, Square2D } from './Square';
 
 
 //function Square(props: {value: number, n: number}){
@@ -52,11 +53,29 @@ function Game() {
         </div>
       </div>
       <div>
+        <h2>Summary</h2>
         <ul>
           <li>display: {stateGame.displaySums ? 'visible':'hidden'}</li>
           <li>square size n: {stateGame.n}</li>
           <li>number of values: {stateGame.values.length}</li>
         </ul>
+      </div>
+      <div>
+        <h3>Build your magic Square</h3>
+        <Square2D
+          square={stateGame.square}
+          n={stateGame.n}
+          displaySums={stateGame.displaySums}
+          dispatch={dispatch}
+        />
+      </div>
+      <div>
+        <h3>Pick your values</h3>
+        <Square1D
+          values={stateGame.values}
+          selectedIndex={-1}
+          dispatch={dispatch}
+        />
       </div>
     </div>
 );

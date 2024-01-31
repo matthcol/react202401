@@ -4,3 +4,8 @@ export interface IStateGame {
     square: number[][],
     values: number[]
 }
+
+export interface IAction {
+    type: string,
+    newN?: number
+}

@@ -1,5 +1,5 @@
 import { initSquare, initValues } from "./magic";
-import { IStateGame } from "./types/stategame";
+import { IAction, IStateGame } from "./types/stategame";
 
 export function initStateGame(n: number): IStateGame {
     return {
@@ -10,10 +10,11 @@ export function initStateGame(n: number): IStateGame {
     }
 }
 
-export function stateGameReducer(stateGame: IStateGame, action: any): IStateGame{
+export function stateGameReducer(stateGame: IStateGame, action: IAction): IStateGame{
     switch (action.type){
         case 'resize_square': {
-            const newN = action.newN;
+            const newN = action.newN??0;
+            if ((newN < 1) || (newN > 15)) return stateGame;
             return initStateGame(newN);
         }
         case 'toggle_display_sums': {
