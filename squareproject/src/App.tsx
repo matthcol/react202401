@@ -33,21 +33,21 @@ function Game() {
           <input 
               type="number" 
               value={stateGame.n} 
-              onChange={(event) => dispatch(({
+              onChange={(event) => dispatch({
                 'type': 'resize_square',
                 'newN': parseInt(event.target.value, 10)
-              }))} 
+              })} 
           />
         </div>
         <div>
           Display sums
           <input
             type="checkbox"
-            onChange={(e) => {
-              // setIsDisplaySum(e.target.checked);
-              // WARNING: following code don't trigger a render
-              // square[0][0]++;
-              // console.log(square);
+            checked={stateGame.displaySums}
+            onChange={(event) => {
+              dispatch({
+                'type': 'toggle_display_sums'
+              })
             }}
           />
         </div>
